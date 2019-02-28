@@ -1,8 +1,10 @@
 #! /bin/bash
 
-docker stop conjur-autofailover-master && docker rm conjur-autofailover-master
-docker stop conjur-autofailover-standby1 && docker rm conjur-autofailover-standby1
-docker stop conjur-autofailover-standby2 && docker rm conjur-autofailover-standby2
-docker stop conjur-autofailover-cli && docker rm conjur-autofailover-cli
-docker network rm conjur-autofailover-cluster
+. ./vars.sh
+
+docker stop $master_container_name && docker rm $master_container_name
+docker stop $standby1_container_name && docker rm $standby1_container_name
+docker stop $standby2_container_name && docker rm $standby2_container_name
+docker stop $conjur_cli_container_name && docker rm $conjur_cli_container_name
+docker network rm $docker_network_name
 rm cluster-policy.yml
