@@ -2,7 +2,7 @@
 
 . ./vars.sh
 
-docker run -d -it --network conjur-autofailover-cluster --name $conjur_cli_container_name $conjur_cli_image:$conjur_cli_version
+docker run -d -it --network $docker_network_name --name $conjur_cli_container_name $conjur_cli_image:$conjur_cli_version
 cat cluster-policy-template.yml | sed -e "s/{{ CONJUR_AUTOFAILOVER_MASTER }}/$master_container_name/g" \
     -e "s/{{ CONJUR_AUTOFAILOVER_STANDBY1 }}/$standby1_container_name/g" \
     -e "s/{{ CONJUR_AUTOFAILOVER_STANDBY2 }}/$standby2_container_name/g" \
