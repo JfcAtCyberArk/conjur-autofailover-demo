@@ -1,0 +1,17 @@
+- !policy
+  id: conjur
+  body:
+    - !policy
+        id: cluster/cluster-policy
+        body:
+        - !layer
+        - &hosts
+          - !host
+            id: {{ CONJUR_AUTOFAILOVER_MASTER }}
+          - !host
+            id: {{ CONJUR_AUTOFAILOVER_STANDBY1 }}
+          - !host
+            id: {{ CONJUR_AUTOFAILOVER_STANDBY2 }}
+        - !grant
+          role: !layer
+          member: *hosts 
